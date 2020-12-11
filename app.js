@@ -12,6 +12,9 @@ const app = express();
 
 app.use(express.json());
 
+app.use("/uploads/images", express.static(path.join("uploads", "images")));
+app.use(express.static(path.join("public")));
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -22,21 +25,23 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/uploads/images", express.static(path.join("uploads", "images")));
-
 app.use("/api/places", placesRoutes);
 
 app.use("/api/users", usersRoutes);
 
 app.use((req, res, next) => {
-  if (req.file) {
-    fs.unlink(req.file.path, (err) => {
-      console.log(err);
-    });
-  }
-  const error = new HttpError("Could not find this route", 404);
-  throw error;
+  res.sendFile(path.resolve(__dirname, "public", "index.html"));
 });
+
+// app.use((req, res, next) => {
+//   if (req.file) {
+//     fs.unlink(req.file.path, (err) => {
+//       console.log(err);
+//     });
+//   }
+//   const error = new HttpError("Could not find this route", 404);
+//   throw error;
+// });
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {
