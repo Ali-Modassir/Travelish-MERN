@@ -75,7 +75,7 @@ const signUp = async (req, res, next) => {
 
   res
     .status(201)
-    .json({ userId: createUser, id, email: createUser.email, token: token });
+    .json({ userId: createUser.id, email: createUser.email, token: token });
 };
 
 const loginIn = async (req, res, next) => {
@@ -115,7 +115,7 @@ const loginIn = async (req, res, next) => {
 
   let token;
   try {
-    token = await jwt.sign(
+    token = jwt.sign(
       {
         userId: existingUser.id,
         email: existingUser.email,
