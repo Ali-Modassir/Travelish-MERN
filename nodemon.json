@@ -1,0 +1,8 @@
+{
+    "env" : {
+        "DB_USER" : "alimodassir",
+        "DB_PASSWORD" : "2OAoXPAs8z7T8zii",
+        "DB_NAME" : "travelish-mern",
+        "JWT_KEY" : "thisismodassirali_memoriesshareapp"
+    }
+}
